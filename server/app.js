@@ -1,18 +1,11 @@
-console.log(process.env.DATABASE_URI)
 const express = require('express');
 const cors = require('cors');
 const app = express();
 const routes = require("./routes/controller");
-console.log(process.env.DATABASE_URI)
-console.log(process.env.DATABASE_URI)
-console.log(process.env.DATABASE_URI)
 
 app.use(express.json());
-console.log(process.env.DATABASE_URI)
 app.use(cors());
-console.log(process.env.DATABASE_URI)
 app.listen(3001);
-console.log(process.env.DATABASE_URI)
 
 app.use(routes);
 

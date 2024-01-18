@@ -6,7 +6,7 @@ export default function Display() {
 
     React.useEffect(() => {
         async function fetchData(){
-            console.log(process.env.API_URI)
+            console.log(process.env.DATABASE_URI)
             const response = await fetch(`${process.env.API_URI}`);
             const fetchjson = await response.json();
             setData(fetchjson);
