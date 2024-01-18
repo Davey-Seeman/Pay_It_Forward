@@ -6,7 +6,7 @@ export default function Display() {
 
     React.useEffect(() => {
         async function fetchData(){
-        const response = await fetch(process.env.API_URI);
+        const response = await fetch("https://pif-backend.onrender.com");
         const fetchjson = await response.json();
         setData(fetchjson);
         }
