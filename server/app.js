@@ -6,7 +6,6 @@ const routes = require("./routes/controller");
 app.use(express.json());
 app.use(cors());
 app.listen(3001);
-require("dotenv").config();
 
 app.use(routes);
 
