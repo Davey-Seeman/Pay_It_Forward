@@ -8,6 +8,7 @@ app.use(cors());
 app.listen(3001);
 
 app.use(routes);
+console.log(process.env.DATABASE_URI)
 
 
 async function run() {
