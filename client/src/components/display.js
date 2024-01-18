@@ -6,7 +6,7 @@ export default function Display() {
 
     React.useEffect(() => {
         async function fetchData(){
-        const response = await fetch("http://localhost:3001");
+        const response = await fetch(process.env.API_URI);
         const fetchjson = await response.json();
         setData(fetchjson);
         }
