@@ -21,7 +21,7 @@ export default function Create() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(createData)
         }
-        await fetch("https://pif-backend.onrender.com/",fetchParams);
+        await fetch(`${process.env.REACT_APP_API}`,fetchParams);
     }
 
 
