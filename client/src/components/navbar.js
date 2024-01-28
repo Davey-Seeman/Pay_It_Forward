@@ -15,7 +15,7 @@ export default function Navbar() {
           headers: { "Content-Type": "application/json" },
           credentials: 'include'
       }
-      var auth = await fetch(`${process.env.REACT_APP_API}` + "/auth",fetchParams);
+      var auth = await fetch(`${process.env.REACT_APP_API}/auth`,fetchParams);
       var result = await auth.json()
       if (result.status){
         console.log("welcome:" + result.username);
@@ -28,7 +28,9 @@ export default function Navbar() {
 
   function loginBtn(){
     return(
-      <a href="/login" className="btn btn-dark h-25">Log In</a>
+      <NavLink className="btn btn-dark h-25" to="/login">
+        Log in
+      </NavLink>
     )
   }
   
@@ -48,7 +50,7 @@ export default function Navbar() {
       headers: { "Content-Type": "application/json" },
       credentials: 'include',
     }
-    await fetch("http://localhost:3001/logout",fetchParams);
+    await fetch(`${process.env.REACT_APP_API}/logout`,fetchParams);
   }
 
   return (
@@ -67,7 +69,10 @@ export default function Navbar() {
         </h4>
 
         <div>{loginStatus.status ? logoutBtn() : loginBtn()}</div>
-        <a href="/register" className="btn btn-dark h-25 m-4">Sign up</a>
+
+        <NavLink className="btn btn-dark h-25 m-4" to="/register">
+          Register
+        </NavLink>
 
       </nav>
     </div>
