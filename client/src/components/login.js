@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login(){
+
+    const navigate = useNavigate();
 
     const [loginInfo,setLoginInfo] = React.useState({
         username: '',
@@ -12,6 +15,7 @@ export default function Login(){
     }
 
     async function onSubmit(event){
+        navigate("/");
         const fetchParams = {
             method: "POST",
             headers: { "Content-Type": "application/json" },

@@ -35,7 +35,6 @@ router.post('/register', async (req, res) => {
     username: req.body.username,
     password: hashedP
   })
-
 })
 
 router.post('/login', passport.authenticate('local', {
