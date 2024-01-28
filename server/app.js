@@ -18,7 +18,7 @@ app.use(passport.session());
 
 //express initialization
 app.use(express.json());
-app.use(cors({origin:"https://pif-backend.onrender.com/", credentials: true}));
+app.use(cors({origin:"https://pif-frontend.onrender.com", credentials: true}));
 app.use(routes.router);
 app.listen(3001);
 //app.use(flash());
