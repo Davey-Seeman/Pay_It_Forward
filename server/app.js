@@ -1,13 +1,27 @@
+//express imports
 const express = require('express');
-const cors = require('cors');
 const app = express();
+const cors = require('cors');
 const routes = require("./routes/controller");
 
-app.use(express.json());
-app.use(cors());
-app.listen(3001);
+//passport imports
+const passport = require('passport');
+const session = require('express-session')
+const config = require("./middleware/passport_config");
+//const flash = require('express-flash')
 
-app.use(routes);
+//passport initialization
+config(routes.users)
+app.use(session({ secret: 'hello', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//express initialization
+app.use(express.json());
+app.use(cors({origin:"http://localhost:3000", credentials: true}));
+app.use(routes.router);
+app.listen(3001);
+//app.use(flash());
 
 
 async function run() {

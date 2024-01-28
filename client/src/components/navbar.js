@@ -5,22 +5,71 @@ import { NavLink } from "react-router-dom";
 
 // Here, we display our Navbar
 export default function Navbar() {
- return (
-   <div>
-     <nav className="d-flex justify-content-between bg-light">
-       <h4>
-        <NavLink className="nav-link p-4" to="/">
-            Home
-        </NavLink>
-       </h4>
 
-       <h4>
-        <NavLink className="nav-link p-4" to="/create">
-          Submit Task
-        </NavLink>
-       </h4>
+  const [loginStatus,setLoginStatus] = React.useState(false);
 
-     </nav>
-   </div>
- );
+  React.useEffect(() => {
+    async function fetchAuth(){
+      const fetchParams = {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: 'include'
+      }
+      var auth = await fetch(`${process.env.REACT_APP_API}` + "/auth",fetchParams);
+      var result = await auth.json()
+      if (result.status){
+        console.log("welcome:" + result.username);
+      }
+      setLoginStatus(result);
+    }
+    fetchAuth();
+    return;
+  }, []);
+
+  function loginBtn(){
+    return(
+      <a href="/login" className="btn btn-dark h-25">Log In</a>
+    )
+  }
+  
+  function logoutBtn(){
+    return(
+      <div>
+        <h3>Welcome {loginStatus.username}</h3>
+        <button onClick = {logout} className="btn btn-dark h-25">Log Out</button>
+      </div>
+    )
+  }
+
+  async function logout(){
+    setLoginStatus(false)
+    const fetchParams = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: 'include',
+    }
+    await fetch("http://localhost:3001/logout",fetchParams);
+  }
+
+  return (
+    <div>
+      <nav className="d-flex justify-content-between bg-light align-items-center">
+        <h4>
+          <NavLink className="nav-link p-4" to="/">
+              Home
+          </NavLink>
+        </h4>
+
+        <h4>
+          <NavLink className="nav-link p-4" to="/create">
+            Submit Task
+          </NavLink>
+        </h4>
+
+        <div>{loginStatus.status ? logoutBtn() : loginBtn()}</div>
+        <a href="/register" className="btn btn-dark h-25 m-4">Sign up</a>
+
+      </nav>
+    </div>
+  );
 }

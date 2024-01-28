@@ -6,7 +6,8 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar";
 import Create from "./components/create";
 import Display from "./components/display";
-//import { Route, Routes } from "react-router-dom";
+import Login from "./components/login";
+import Register from "./components/register";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Display />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

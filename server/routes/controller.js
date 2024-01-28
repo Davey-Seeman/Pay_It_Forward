@@ -1,6 +1,11 @@
 const express = require("express");
-const router = express.Router();
 const collection = require("../dbaccessor/dbaccessor");
+
+const passport = require('passport');
+const bcrypt = require("bcrypt")
+const router = express.Router();
+
+const users = [] //will be deleted: users will go to DB
 
 router.get('/', async (req,res)=>{
   var data = {}
@@ -13,7 +18,6 @@ router.get('/', async (req,res)=>{
 
 
 router.post('/', (req, res) => {
-  res.send(req.body.description);
   const chore = {
     title: req.body.title,
     description: req.body.description,
@@ -22,11 +26,42 @@ router.post('/', (req, res) => {
     completionStatus: false
   }
   collection.insertOne(chore);
-  })
-
-
-router.get('/:userid', (req, res) => {
-    res.send(req.params.userid)
 })
 
-module.exports = router;
+router.post('/register', async (req, res) => {
+  const hashedP = await bcrypt.hash(req.body.password,10)
+  users.push({
+    id: Date.now().toString(),
+    username: req.body.username,
+    password: hashedP
+  })
+
+})
+
+router.post('/login', passport.authenticate('local', {
+  //successRedirect: '/',
+  //failureRedirect: '/login',
+  failureFlash: false
+}));
+
+router.post('/logout', (req, res) => {
+  req.logout((err) => {
+    if (err){
+      return res.status(500).send('Internal Server Error');
+    }
+  });
+})
+
+router.get('/auth', (req, res) => {
+  if (!req.isAuthenticated()){
+    res.json({status: false})
+  } else {
+    res.json({status: true, username: req.user.username})
+  }
+});
+
+
+module.exports = {
+  router: router,
+  users: users
+};
