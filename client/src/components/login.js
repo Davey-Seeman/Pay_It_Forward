@@ -15,7 +15,7 @@ export default function Login(){
     }
 
     async function onSubmit(event){
-        navigate("/");
+        navigate("/login");
         const fetchParams = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
