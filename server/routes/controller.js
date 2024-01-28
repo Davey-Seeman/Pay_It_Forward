@@ -29,6 +29,7 @@ router.post('/', (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
+  console.log('registering')
   const hashedP = await bcrypt.hash(req.body.password,10)
   users.push({
     id: Date.now().toString(),
