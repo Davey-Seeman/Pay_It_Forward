@@ -20,7 +20,7 @@ export default function Register(){
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(loginInfo)
         }
-        await fetch(`${process.env.REACT_APP_API}` + "/register",fetchParams)
+        await fetch(`${process.env.REACT_APP_API}/register`,fetchParams)
     }
 
     return(

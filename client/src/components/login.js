@@ -18,7 +18,7 @@ export default function Login(){
             credentials: 'include',
             body: JSON.stringify(loginInfo)
         }
-        await fetch(`${process.env.REACT_APP_API}` + "/login",fetchParams);
+        await fetch(`${process.env.REACT_APP_API}/login`,fetchParams);
     }
 
     return(
