@@ -9,7 +9,7 @@ module.exports = function config(users){
             console.log("no user")
             return done(null,false,{message: "No User With That Username"})
         }
-        else if (await bcrypt.compare(user.password, password)){
+        else if (await bcrypt.compare(password, user.password)){
             console.log("found user")
             return done(null, user)
         }
