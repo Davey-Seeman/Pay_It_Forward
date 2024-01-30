@@ -1,4 +1,5 @@
 //express imports
+const cookieSession = require('cookie-session');
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -6,7 +7,6 @@ const routes = require("./routes/controller");
 
 //passport imports
 const passport = require('passport');
-const session = require('express-session')
 const config = require("./middleware/passport_config");
 
 //express initialization
@@ -14,8 +14,11 @@ app.use(express.json());
 app.use(cors({origin:`${process.env.CLIENT_URL}`,credentials: true}));
 
 //passport initialization
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 config(routes.users)
-app.use(session({ secret: 'hello', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 

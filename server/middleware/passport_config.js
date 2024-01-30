@@ -6,7 +6,7 @@ module.exports = function config(users){
     passport.use(new LocalStrategy( (username, password, done) => {
         const user = users.find(user => user.username === username);
         if (user == null){
-            console.log("null user")
+            console.log("no user")
             return done(null,false,{message: "No User With That Username"})
         }
         else if (bcrypt.compare(user.password, password)){
@@ -21,8 +21,12 @@ module.exports = function config(users){
     passport.serializeUser((user, done) => done(null, user.id));
 
     passport.deserializeUser((id, done) => {
-        const user = users.find(user => user.id === id)
-        return done(null, user)
+        try {
+            const user = users.find(user => user.id === id)
+            return done(null, user)
+        } catch (e) {
+            console.log("no user")
+        }
     })
 
 };
