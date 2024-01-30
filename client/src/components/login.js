@@ -16,25 +16,13 @@ export default function Login(){
 
     async function onSubmit(event){
         event.preventDefault();
-        var fetchParams = {
+        const fetchParams = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(loginInfo),
             credentials: 'include'
         }
         await fetch(`${process.env.REACT_APP_API}/login`, fetchParams);
-
-        fetchParams = {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            credentials: 'include'
-        }
-        var auth = await fetch(`${process.env.REACT_APP_API}/auth`,fetchParams);
-        var result = await auth.json();
-        
-        console.log(result)
-
-
         navigate("/");
     }
 
