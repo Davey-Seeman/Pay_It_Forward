@@ -17,6 +17,7 @@ app.use(cors({origin:`${process.env.CLIENT_URL}`,credentials: true}));
 app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2'],
+  secure: true,
   sameSite: 'None' //this can be insecure, but it allows cross-site requests
 }))
 config(routes.users)
