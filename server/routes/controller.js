@@ -39,8 +39,7 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/login', passport.authenticate('local'), (req,res) => {
-  res.send("Logged in");
-  console.log(req.isAuthenticated());
+  res.send("Logged in:" + req.isAuthenticated());
 });
 
 router.post('/logout', (req, res) => {
