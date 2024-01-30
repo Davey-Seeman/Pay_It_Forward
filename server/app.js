@@ -18,8 +18,8 @@ app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2'],
   maxAge: 1000 * 60, //one minute
-  sameSite: false,
-  //secure: true,
+  sameSite: 'none',
+  secure: true,
 }))
 config(routes.users)
 app.use(passport.initialize());
