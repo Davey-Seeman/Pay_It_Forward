@@ -9,7 +9,7 @@ module.exports = function config(users){
             console.log("no user")
             return done(null,false,{message: "No User With That Username"})
         }
-        else if (await bcrypt.compare(user.password, password)){
+        else if (await bcrypt.compare(password, user.password)){
             console.log("found user")
             return done(null, user)
         }
@@ -21,11 +21,11 @@ module.exports = function config(users){
     passport.serializeUser((user, done) => done(null, user.id));
 
     passport.deserializeUser((id, done) => {
-        try {
-            const user = users.find(user => user.id === id)
-            return done(null, user)
-        } catch (e) {
-            console.log("no user")
+        const user = users.find(user => user.id === id);
+        if (user){
+            return done(null, user);
+        } else {
+            console.log("no user");
         }
     })
 
