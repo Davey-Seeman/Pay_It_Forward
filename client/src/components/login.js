@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 export default function Login(){
+
+    const navigate = useNavigate();
 
     const [loginInfo,setLoginInfo] = React.useState({
         username: '',
@@ -12,13 +15,15 @@ export default function Login(){
     }
 
     async function onSubmit(event){
+        event.preventDefault();
         const fetchParams = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            credentials: 'include',
-            body: JSON.stringify(loginInfo)
+            body: JSON.stringify(loginInfo),
+            credentials: 'include'
         }
-        await fetch(`${process.env.REACT_APP_API}/login`,fetchParams);
+        await fetch(`${process.env.REACT_APP_API}/login`, fetchParams);
+        navigate("/");
     }
 
     return(

@@ -2,29 +2,13 @@ import React from "react";
 
 // We import NavLink to utilize the react router.
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router";
+
 
 // Here, we display our Navbar
 export default function Navbar() {
 
-  const [loginStatus,setLoginStatus] = React.useState(false);
-
-  React.useEffect(() => {
-    async function fetchAuth(){
-      const fetchParams = {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-          credentials: 'include'
-      }
-      var auth = await fetch(`${process.env.REACT_APP_API}/auth`,fetchParams);
-      var result = await auth.json()
-      if (result.status){
-        console.log("welcome:" + result.username);
-      }
-      setLoginStatus(result);
-    }
-    fetchAuth();
-    return;
-  }, []);
+  const navigate = useNavigate();
 
   function loginBtn(){
     return(
@@ -34,24 +18,23 @@ export default function Navbar() {
     )
   }
   
-  function logoutBtn(){
+ /* function logoutBtn(){
     return(
       <div>
-        <h3>Welcome {loginStatus.username}</h3>
         <button onClick = {logout} className="btn btn-dark h-25">Log Out</button>
       </div>
     )
-  }
+  }*/
 
-  async function logout(){
-    setLoginStatus(false)
+  /*async function logout(){
     const fetchParams = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: 'include',
     }
     await fetch(`${process.env.REACT_APP_API}/logout`,fetchParams);
-  }
+    navigate("/login");
+  }*/
 
   return (
     <div>
@@ -68,7 +51,7 @@ export default function Navbar() {
           </NavLink>
         </h4>
 
-        <div>{loginStatus.status ? logoutBtn() : loginBtn()}</div>
+        <div>{loginBtn() /*TODO: add logout btn by moving state up*/}</div>
 
         <NavLink className="btn btn-dark h-25 m-4" to="/register">
           Register

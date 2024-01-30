@@ -16,6 +16,7 @@ export default function Create() {
     }
 
     async function onSubmit(event){
+        event.preventDefault();
         const fetchParams = {
             method: "POST",
             headers: { "Content-Type": "application/json" },

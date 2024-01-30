@@ -29,23 +29,22 @@ router.post('/', (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-  console.log('registering')
-  const hashedP = await bcrypt.hash(req.body.password,10)
+  const hashedP = await bcrypt.hash(req.body.password, 10);
   users.push({
     id: Date.now().toString(),
     username: req.body.username,
     password: hashedP
   })
+  res.send("Register")
 })
 
-router.post('/login', passport.authenticate('local'));
+router.post('/login', passport.authenticate('local'), (req,res) => {
+  res.send("Logged in");
+});
 
 router.post('/logout', (req, res) => {
-  req.logout((err) => {
-    if (err){
-      return res.status(500).send('Internal Server Error');
-    }
-  });
+  req.logout();
+  res.send("Logged out");
 })
 
 router.get('/auth', (req, res) => {

@@ -8,7 +8,10 @@ const routes = require("./routes/controller");
 const passport = require('passport');
 const session = require('express-session')
 const config = require("./middleware/passport_config");
-//const flash = require('express-flash')
+
+//express initialization
+app.use(express.json());
+app.use(cors({origin:`${process.env.CLIENT_URL}`,credentials: true}));
 
 //passport initialization
 config(routes.users)
@@ -16,12 +19,9 @@ app.use(session({ secret: 'hello', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//express initialization
-app.use(express.json());
-app.use(cors({origin:`${process.env.CLIENT_URL}`, credentials: true}));
+//routes
 app.use(routes.router);
 app.listen(3001);
-//app.use(flash());
 
 
 async function run() {

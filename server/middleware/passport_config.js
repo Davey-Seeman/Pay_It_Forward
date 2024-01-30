@@ -4,7 +4,7 @@ const passport = require('passport');
 
 module.exports = function config(users){
     passport.use(new LocalStrategy( (username, password, done) => {
-        const user = users.find(user => user.username === username)
+        const user = users.find(user => user.username === username);
         if (user == null){
             console.log("null user")
             return done(null,false,{message: "No User With That Username"})
@@ -18,7 +18,6 @@ module.exports = function config(users){
             return done(null,false,{message: "Password Incorrect"})
         }
     }));
-
     passport.serializeUser((user, done) => done(null, user.id));
 
     passport.deserializeUser((id, done) => {
