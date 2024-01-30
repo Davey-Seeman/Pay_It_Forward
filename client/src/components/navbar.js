@@ -2,13 +2,13 @@ import React from "react";
 
 // We import NavLink to utilize the react router.
 import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router";
+//import { useNavigate } from "react-router";
 
 
 // Here, we display our Navbar
 export default function Navbar() {
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   function loginBtn(){
     return(
