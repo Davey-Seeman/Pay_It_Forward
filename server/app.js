@@ -18,7 +18,7 @@ app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2'],
   maxAge: 1000 * 60, //one minute
-  sameSite: true,
+  sameSite: false,
   //secure: true,
 }))
 config(routes.users)
