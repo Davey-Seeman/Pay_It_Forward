@@ -17,8 +17,9 @@ app.use(cors({origin:`${process.env.CLIENT_URL}`,credentials: true}));
 app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2'],
-  sameSite: 'none', //this can be insecure, but it allows cross-site requests
-  secure: true
+  maxAge: 1000 * 60, //one minute
+  sameSite: true,
+  //secure: true,
 }))
 config(routes.users)
 app.use(passport.initialize());
